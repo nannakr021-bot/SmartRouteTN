@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#123b66">
+  <title>SmartRoute TN | College Bus Management</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="SmartRoute TN home">
+      <span class="brand-icon">🚌</span>
+      <span><strong>SmartRoute TN</strong><small>College Bus Management</small></span>
+    </a>
+    <nav class="nav">
+      <button class="nav-btn active" data-view="student">Student Dashboard</button>
+      <button class="nav-btn" data-view="admin">Staff Panel</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">SMART MOBILITY • COLLEGE TRANSPORT</p>
+        <h1>Your college bus,<br><span>one clear dashboard.</span></h1>
+        <p class="hero-copy">Check routes, seat availability, bus status and transport announcements in one place.</p>
+      </div>
+      <div class="hero-art" aria-hidden="true"><span>🚌</span><i>✦</i><b>TN</b></div>
+    </section>
+
+    <div class="demo-notice"><span class="notice-dot"></span><strong>Prototype mode:</strong> all bus locations, seat counts and timings are sample data, not live GPS information.</div>
+
+    <section id="student-view" class="view">
+      <div class="section-heading">
+        <div><p class="eyebrow">STUDENT VIEW</p><h2>Bus dashboard</h2></div>
+        <label class="route-filter">Choose route
+          <select id="route-filter" aria-label="Choose a route">
+            <option value="all">All routes</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="stats-grid">
+        <article class="stat-card"><span class="stat-icon">🚌</span><div><p>Active buses</p><strong id="stat-buses">0</strong></div></article>
+        <article class="stat-card"><span class="stat-icon">💺</span><div><p>Available seats</p><strong id="stat-seats">0</strong></div></article>
+        <article class="stat-card"><span class="stat-icon">📢</span><div><p>Announcements</p><strong id="stat-alerts">0</strong></div></article>
+      </div>
+
+      <div class="section-heading list-heading"><div><h2>Available buses</h2><p class="muted">Choose a bus card to see its route stops.</p></div></div>
+      <div id="bus-list" class="bus-grid" aria-live="polite"></div>
+
+      <section class="panel stops-panel">
+        <div class="panel-heading"><div><p class="eyebrow">ROUTE DETAILS</p><h2 id="stops-title">Route stops</h2></div><span class="pill">Sample schedule</span></div>
+        <ol id="stop-list" class="stop-list"></ol>
+      </section>
+
+      <section class="panel announcements-panel">
+        <div class="panel-heading"><div><p class="eyebrow">LATEST UPDATES</p><h2>Transport announcements</h2></div></div>
+        <div id="announcement-list" class="announcement-list"></div>
+      </section>
+    </section>
+
+    <section id="admin-view" class="view hidden">
+      <div class="section-heading"><div><p class="eyebrow">STAFF VIEW • DEMO ONLY</p><h2>Transport staff panel</h2><p class="muted">Use this panel to update demo bus status and publish announcements.</p></div></div>
+      <div class="admin-layout">
+        <section class="panel">
+          <div class="panel-heading"><h2>Update bus status</h2></div>
+          <form id="status-form" class="form">
+            <label for="admin-bus">Bus</label>
+            <select id="admin-bus" required></select>
+            <label for="admin-status">Status</label>
+            <select id="admin-status" required>
+              <option value="On Time">On Time</option>
+              <option value="Delayed">Delayed</option>
+              <option value="Completed">Completed</option>
+            </select>
+            <label for="admin-arrival">Expected arrival / note</label>
+            <input id="admin-arrival" type="text" maxlength="80" placeholder="e.g. College gate at 8:45 AM">
+            <button class="primary-btn" type="submit">Save bus status</button>
+            <p id="status-feedback" class="form-feedback" role="status"></p>
+          </form>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading"><h2>Publish announcement</h2></div>
+          <form id="announcement-form" class="form">
+            <label for="announcement-bus">Bus</label>
+            <select id="announcement-bus" required></select>
+            <label for="announcement-title">Announcement title</label>
+            <input id="announcement-title" type="text" maxlength="70" required placeholder="e.g. Bus running late">
+            <label for="announcement-message">Message</label>
+            <textarea id="announcement-message" rows="4" maxlength="240" required placeholder="Tell students what they need to know..."></textarea>
+            <button class="primary-btn" type="submit">Publish announcement</button>
+            <p id="announcement-feedback" class="form-feedback" role="status"></p>
+          </form>
+        </section>
+      </div>
+      <div class="panel reset-panel">
+        <div><h3>Reset demo data</h3><p class="muted">Restore the original sample buses and announcements in this browser.</p></div>
+        <button id="reset-demo" class="secondary-btn" type="button">Reset demo</button>
+      </div>
+      <p class="security-note">Important: this is a public demo panel, not a secure staff login. Do not use it to store real student information or operate real college transport.</p>
+    </section>
+
+    <footer class="footer"><span>© <span id="year"></span> SmartRoute TN</span><span>Built for an Engineering Marathon prototype</span></footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
